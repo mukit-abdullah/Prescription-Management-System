@@ -1,0 +1,80 @@
+<div class="form-container">
+  <h2>{{ isEditMode ? 'Edit Prescription' : 'New Prescription' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="prescription-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="prescriptionDate">Prescription Date *</label>
+        <input id="prescriptionDate" type="date" formControlName="prescriptionDate" />
+        <div class="error" *ngIf="form.get('prescriptionDate')?.invalid && form.get('prescriptionDate')?.touched">
+          Prescription date is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="patientName">Patient Name *</label>
+        <input id="patientName" type="text" formControlName="patientName" />
+        <div class="error" *ngIf="form.get('patientName')?.invalid && form.get('patientName')?.touched">
+          Patient name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="patientAge">Patient Age *</label>
+        <input
+          id="patientAge"
+          type="number"
+          formControlName="patientAge"
+          min="0"
+          max="120"
+        />
+        <div class="error" *ngIf="form.get('patientAge')?.invalid && form.get('patientAge')?.touched">
+          Age must be between 0 and 120.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="patientGender">Patient Gender *</label>
+        <select id="patientGender" formControlName="patientGender">
+          <option value="">Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <div class="error" *ngIf="form.get('patientGender')?.invalid && form.get('patientGender')?.touched">
+          Gender is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="diagnosis">Diagnosis *</label>
+      <textarea id="diagnosis" rows="3" formControlName="diagnosis"></textarea>
+      <div class="error" *ngIf="form.get('diagnosis')?.invalid && form.get('diagnosis')?.touched">
+        Diagnosis is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="medicines">Medicines *</label>
+      <textarea id="medicines" rows="3" formControlName="medicines"></textarea>
+      <div class="error" *ngIf="form.get('medicines')?.invalid && form.get('medicines')?.touched">
+        Medicines are required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nextVisitDate">Next Visit Date (optional)</label>
+      <input id="nextVisitDate" type="date" formControlName="nextVisitDate" />
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Saving...' : 'Save' }}
+      </button>
+      <button type="button" routerLink="/prescriptions">Cancel</button>
+    </div>
+  </form>
+</div>

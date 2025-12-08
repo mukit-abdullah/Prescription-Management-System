@@ -1,0 +1,99 @@
+<div class="list-container">
+  <div class="list-header">
+    <h2>Prescriptions</h2>
+    <button type="button" (click)="newPrescription()">New Prescription</button>
+  </div>
+
+  <form [formGroup]="filterForm" (ngSubmit)="onFilterChange()" class="filters">
+    <div class="filter-group">
+      <label for="startDate">Start Date</label>
+      <input id="startDate" type="date" formControlName="startDate" />
+    </div>
+
+    <div class="filter-group">
+      <label for="endDate">End Date</label>
+      <input id="endDate" type="date" formControlName="endDate" />
+    </div>
+
+    <div class="filter-group">
+      <label for="pageSize">Page Size</label>
+      <select id="pageSize" formControlName="pageSize">
+        <option *ngFor="let size of pageSizeOptions" [value]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-actions">
+      <button type="submit">Apply</button>
+    </div>
+  </form>
+
+  <div *ngIf="loading" class="loading">Loading prescriptions...</div>
+
+  <table class="prescriptions-table" *ngIf="!loading && prescriptions.length">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Patient</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Diagnosis</th>
+        <th>Medicines</th>
+        <th>Next Visit</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of prescriptions">
+        <td>{{ p.prescriptionDate }}</td>
+        <td>{{ p.patientName }}</td>
+        <td>{{ p.patientAge }}</td>
+        <td>{{ p.patientGender }}</td>
+        <td class="ellipsis">{{ p.diagnosis }}</td>
+        <td class="ellipsis">{{ p.medicines }}</td>
+        <td>{{ p.nextVisitDate || '-' }}</td>
+        <td>
+          <button type="button" (click)="editPrescription(p)">Edit</button>
+          <button type="button" (click)="confirmDelete(p)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !prescriptions.length" class="empty-state">
+    No prescriptions found for the selected range.
+  </div>
+
+  <div class="pagination" *ngIf="totalElements > 0">
+    <button type="button" (click)="changePage(-1)" [disabled]="pageIndex === 0">
+      Previous
+    </button>
+    <span>
+      Page {{ pageIndex + 1 }} of {{ totalPages }}
+      ({{ totalElements }} total)
+    </span>
+    <button
+      type="button"
+      (click)="changePage(1)"
+      [disabled]="pageIndex + 1 >= totalPages"
+    >
+      Next
+    </button>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="deleteTarget">
+    <div class="modal">
+      <h3>Delete Prescription</h3>
+      <p>
+        Are you sure you want to delete the prescription for
+        <strong>{{ deleteTarget?.patientName }}</strong> on
+        <strong>{{ deleteTarget?.prescriptionDate }}</strong>?
+      </p>
+      <div class="modal-actions">
+        <button type="button" (click)="deleteConfirmed()">Yes, Delete</button>
+        <button type="button" (click)="cancelDelete()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

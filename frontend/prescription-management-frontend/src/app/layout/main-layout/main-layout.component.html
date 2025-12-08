@@ -1,0 +1,17 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>Prescription Manager</h2>
+    </div>
+    <nav>
+      <a routerLink="/prescriptions" routerLinkActive="active">Prescriptions</a>
+      <a routerLink="/prescriptions/new" routerLinkActive="active">New Prescription</a>
+      <a routerLink="/reports" routerLinkActive="active">Reports</a>
+      <button type="button" (click)="logout()" class="logout-btn">Logout</button>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

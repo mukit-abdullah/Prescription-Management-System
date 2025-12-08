@@ -1,0 +1,147 @@
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-header h2 {
+  margin: 0;
+}
+
+.list-header button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-actions button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  background: #111827;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.loading {
+  padding: 1rem 0;
+}
+
+.prescriptions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.prescriptions-table th,
+.prescriptions-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.prescriptions-table th {
+  background: #f9fafb;
+}
+
+.prescriptions-table button {
+  margin-right: 0.25rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.ellipsis {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.empty-state {
+  padding: 1rem 0;
+  color: #6b7280;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pagination button {
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  border: none;
+  background: #e5e7eb;
+  cursor: pointer;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.modal-actions button:first-child {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.modal-actions button:last-child {
+  background: #e5e7eb;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ellipsis {
+    max-width: 120px;
+  }
+}

@@ -1,0 +1,36 @@
+<div class="reports-container">
+  <div class="header">
+    <h2>Day-wise Prescription Count (Last 10 Days)</h2>
+
+    <div class="filter-group">
+      <label for="date">End Date</label>
+      <input
+        id="date"
+        type="date"
+        [(ngModel)]="selectedDate"
+        (change)="onDateChange()"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading report...</div>
+
+  <ngx-charts-bar-vertical
+    *ngIf="!loading && data.length"
+    [results]="data"
+    [view]="view"
+    [scheme]="colorScheme"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [legend]="legend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+  >
+  </ngx-charts-bar-vertical>
+
+  <div *ngIf="!loading && !data.length" class="empty-state">
+    No data available for the selected period.
+  </div>
+</div>
